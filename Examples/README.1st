@@ -1,0 +1,25 @@
+A very simple example of using the installed StockOverflow trading platform.
+
+% tar xvf Platform.tar
+% cd Examples
+% make
+% ProgramTrader
+
+The libPlatform.so library needs to know where the stock data and the account
+files are located.  The library will read environment variables to learn where
+those files are being kept.
+
+SO_StockData   : Environment variable that contains the path to the 
+                 StockFile.txt stock market data file.  This can be a relative
+                 or absolute path to the StockFile.txt file.
+
+SO_AccountsDir : Environment variable that contains the path to the directory
+                 which contains the account files
+
+Examples:
+
+% export SO_StockData=data/StockFile.txt                      [relative path]
+% export SO_StockData=/home/1234567/Trader/data/StockFile.txt [absolute path]
+
+% export SO_AccountsDir=../ACCOUNTS_DIR                       [relative path]
+% export SO_AccountsDir=/home/1234567/Trader/ACCOUNTS_DIR     [absolute path]
