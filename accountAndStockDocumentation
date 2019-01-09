@@ -1,0 +1,71 @@
+The account files must be stored in the accounts directory with the filename account_<accountName> and formatted as 
+
+<cash level>
+<openPosition stock symbol>:<buyPrice>:<count>:<day>:<month>:<year>:<Position type>:<sell price>
+<openPosition stock symbol>:<buyPrice>:<count>:<day>:<month>:<year>:<Position type>:<sell price>
+<openPosition stock symbol>:<buyPrice>:<count>:<day>:<month>:<year>:<Position type>:<sell price>
+.
+.
+.
+
+Position types are:
+0 - default
+1 - Stop loss
+2 - Limit order
+3 - Take profit
+4 - Stop loss and take profit order
+
+Example account file
+1000.000000
+GOOGL:500.000000:50:6:10:2016:0:0
+
+The Stock files must be stored in the stocks directory with the format 
+<stock symbol name>{
+	<date (mm/dd/yyyy)>:<Opening price>:<High price>:<Low price>:<Closing price>:<volume>;
+       <date (mm/dd/yyyy)>:<Opening price>:<High price>:<Low price>:<Closing price>:<volume>;
+       <date (mm/dd/yyyy)>:<Opening price>:<High price>:<Low price>:<Closing price>:<volume>;
+       .
+       .
+       .
+       <date (mm/dd/yyyy)>:<Opening price>:<High price>:<Low price>:<Closing price>:<volume>
+}
+
+<stock symbol name>{
+	<date (mm/dd/yyyy)>:<Opening price>:<High price>:<Low price>:<Closing price>:<volume>;
+       <date (mm/dd/yyyy)>:<Opening price>:<High price>:<Low price>:<Closing price>:<volume>;
+       <date (mm/dd/yyyy)>:<Opening price>:<High price>:<Low price>:<Closing price>:<volume>;
+       .
+       .
+       .
+       <date (mm/dd/yyyy)>:<Opening price>:<High price>:<Low price>:<Closing price>:<volume>
+}
+.
+.
+.
+
+
+Example Stock file
+aal{
+	02/15/2018:51.45:51.88:50.94:51.67:3,125,368;
+	02/14/2018:50.24:51.56:50.11:51.07:4,960,426;
+	02/13/2018:49.7:50.92:49.64:50.87:3,748,437;
+       .
+       .
+       .
+	11/20/2017:47.33:47.88:47.12:47.69:2,435,918
+}
+
+aapl{
+	02/15/2018:169.79:173.09:169:172.99:50,908,540;
+	02/14/2018:163.045:167.54:162.88:167.37:40,382,890;
+	02/13/2018:161.95:164.75:161.65:164.34:32,483,310;
+	.
+	.
+	.
+	11/20/2017:170.29:170.56:169.56:169.98:16,041,550
+}
+.
+.
+.
+
+

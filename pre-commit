@@ -1,0 +1,53 @@
+#!/bin/bash
+# Author: Darla Drenckhahn
+# Program: Pre-Commit Hook for Stock Overflow MVP
+# Description: This pre commit hook is called when someone tries to commit 
+#changes to the repository. It will first run all of the unit tests and if any
+# of them fail it will reject the commit. If they all pass then it uses astyle
+#to make sure that the coding standards are met. If they aren't, it runs astyle
+#on the file and changes it and then tells the user to re add the file, commit
+#it and then push to the repository. Got help with how to write this online.
+
+cd .tests   #change into tests directory
+make clean ; make   #run the make file
+if ./main | grep -i "failed"    #search for the word failed after running tests
+then
+    echo "unit tests did not all pass, unable to commit."   #output error stmt
+    exit 1      #reject commit by exiting 1
+else
+    cd ..   #change back to main directory
+fi
+
+#general options we wish to implement when using astyle
+OPTIONS=" -A1CSpH"
+
+RETURN=0
+ASTYLE=$(which astyle)
+
+#make sure astyle is installed, if it's not output error message and exit 
+if [ $? -ne 0 ]; then
+	echo "[!] astyle not installed. Unable to check source file format policy."
+	exit 1
+fi
+
+#get all .cpp, .c or .h files to go through and check for proper formatting
+FILES=`git diff --cached --name-only --diff-filter=ACMR | grep -E "\.(c|cpp|h)$"`
+
+for FILE in $FILES; do
+	#compare formatted file with original file
+	$ASTYLE $OPTIONS < $FILE | cmp -s $FILE -
+	
+	#if they are't equal, output error message and run astyle on file to fix it
+	if [ $? -ne 0 ]; then
+		echo "[!] $FILE does not respect the agreed coding style. "
+		$ASTYLE $OPTIONS $FILE
+		RETURN=1
+	fi
+done
+
+#if we had to fix the formatting of files tell user to re add, commit and push
+if [ $RETURN -eq 1 ]; then
+	echo "Fixed formatting, re add changed files and recommit and push"
+fi
+
+exit $RETURN

@@ -1,0 +1,91 @@
+Trader function call examples
+
+
+how to create a trader object
+Trader trader(accountID);
+
+
+
+how to change account IDs    (void setAccountID(string account))
+trader.setAccountID("stock-trader");
+
+
+
+how to get current account ID    (string getAccountID())
+trader.getAccountID();
+
+
+
+how to get available position    (map<string, Stock> getAvailablePositions())
+map<string, Stock> stocks = trader.getAvailablePositions();
+
+
+
+how to buy a stock    (int buy(string symbol, int shares))
+trader.buy("goog", 20)
+
+
+
+how to get open positions    (vector<OpenPositions> getOpenPositions())
+vector<OpenPosition> openPositions = trader.getOpenPositions();
+
+
+
+how to sell a stock    (int sell(OpenPosition openPosition, int shares))
+vector<OpenPosition> openPositions = trader.getOpenPositions();
+OpenPosition stockToSell;
+
+for(int i = 0; i < openPositions.size(); i++)
+{
+	if(openPositions[i].symbol == "goog")
+	{
+		stockToSell = openPositions[i];
+	}
+}
+//sell all of the stock
+trader.sell(stockToSell, stockToSell.count)
+
+
+
+how to create a limit buy order    (int createlimitBuy(string symbol, int shares, double price))
+//buys 20 shares of goog if the price drops below 1030
+trader.createLimitBuy("goog", 20, 1040);
+
+
+
+how to add a stop loss to an order    (int createStopLoss(OpenPosition openPosition, double price))
+vector<OpenPosition> openPositions = trader.getOpenPositions();
+OpenPosition stopLossOrder = openPositions.back();
+
+trader.createStopLoss(stopLossOrder, 1025);
+
+
+
+how to add a take profit to an order    (int createTakeProfit(OpenPosition openPosition, double price))
+vector<OpenPosition> openPositions = trader.getOpenPositions();
+OpenPosition takeProfitOrder = openPositions.back();
+
+trader.createTakeProfit(takeProfitOrder, 1075);
+
+
+
+how to get the price of a stock    (double getStockPrice(string symbol))
+double price = trader.getStockPrice("aapl");
+
+
+
+how to get your available cash    (double getAccountCash())
+double cashOnHand = trader.getAccountCash();
+
+
+
+how to get the value of your account   (double getAccountValue())
+double portfolioValue = trader.getAccountValue();
+
+
+
+how to get historical data for a stock   (Stock singleStock(string symbol))
+Stock stock = trader.singleStock("goog");
+
+
+
